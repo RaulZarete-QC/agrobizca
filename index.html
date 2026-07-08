@@ -1310,6 +1310,162 @@
       .why-us { padding: 64px 5%; }
       .cta-banner { padding: 72px 5%; }
       .contact-preview { padding: 64px 5%; }
+
+      /* === Product Modal / Lightbox === */
+      .product-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(13, 26, 13, 0.85);
+        backdrop-filter: blur(8px);
+        animation: fadeIn 0.25s ease;
+      }
+      .product-modal.open { display: flex; }
+      .product-modal__inner {
+        background: #fff;
+        border-radius: 24px;
+        max-width: 980px;
+        width: 100%;
+        max-height: 92vh;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        position: relative;
+        animation: scaleIn 0.3s cubic-bezier(.2,.9,.3,1);
+      }
+      .product-modal__close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(13, 26, 13, 0.08);
+        cursor: pointer;
+        font-size: 22px;
+        z-index: 2;
+        transition: all 0.2s;
+      }
+      .product-modal__close:hover { background: rgba(13, 26, 13, 0.18); transform: rotate(90deg); }
+      .product-modal__gallery {
+        background: #f0f7ea;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .product-modal__main-img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .product-modal__main-img img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .product-modal__thumbs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .product-modal__thumb {
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+        padding: 0;
+      }
+      .product-modal__thumb img { width: 100%; height: 100%; object-fit: contain; }
+      .product-modal__thumb:hover { border-color: var(--green); transform: translateY(-2px); }
+      .product-modal__thumb.active { border-color: var(--green); }
+      .product-modal__body {
+        padding: 36px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: auto;
+      }
+      .product-modal__tag {
+        display: inline-block;
+        background: rgba(74, 124, 47, 0.12);
+        color: var(--green);
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        align-self: flex-start;
+      }
+      .product-modal__title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--green-dark);
+        line-height: 1.15;
+        margin: 0;
+      }
+      .product-modal__desc {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #2d3a2a;
+        opacity: 0.85;
+      }
+      .product-modal__specs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .product-modal__spec {
+        background: #f7faf4;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(74, 124, 47, 0.12);
+      }
+      .product-modal__spec-label { font-size: 11px; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+      .product-modal__spec-value { font-size: 15px; color: var(--green-dark); font-weight: 700; margin-top: 2px; }
+      .product-modal__cta {
+        margin-top: auto;
+        padding: 14px 20px;
+        background: var(--green);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 15px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s;
+      }
+      .product-modal__cta:hover { background: var(--green-dark); transform: translateY(-2px); }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes scaleIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      @media (max-width: 720px) {
+        .product-modal__inner { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
+        .product-modal__gallery { padding: 20px; }
+        .product-modal__body { padding: 24px 20px; }
+        .product-modal__title { font-size: 24px; }
+      }
     }
   </style>
 </head>
@@ -2147,6 +2303,109 @@
 
     startAuto();
   })();
+</script>
+
+<!-- === Product Modal / Lightbox === -->
+<div class="product-modal" id="productModal" aria-hidden="true">
+  <div class="product-modal__inner" role="dialog" aria-modal="true">
+    <button class="product-modal__close" id="modalClose" aria-label="Cerrar">×</button>
+    <div class="product-modal__gallery">
+      <div class="product-modal__main-img">
+        <img id="modalMainImg" src="" alt="">
+      </div>
+      <div class="product-modal__thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="product-modal__body">
+      <span class="product-modal__tag" id="modalTag"></span>
+      <h2 class="product-modal__title" id="modalTitle"></h2>
+      <p class="product-modal__desc" id="modalDesc"></p>
+      <div class="product-modal__specs" id="modalSpecs"></div>
+      <a href="#contact" class="product-modal__cta" id="modalCta">
+        <span>Solicitar Cotización</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // === Product data registry (single source of truth) ===
+  const PRODUCT_DATA = {
+    'pollo-engorde': { tag: 'Poultry', title: 'Pollo Engorde', desc: 'Complete balanced feed for broiler chickens. Formulated for rapid weight gain and feed conversion in commercial poultry operations.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Engorde'],['Línea','La Blanquita']], main: 'images/card/pollo-engorde.jpg', extra: ['images/carrusel/pollo-engorde.jpg', 'images/card/pollo-engorde.jpg'] },
+    'pollo-iniciador': { tag: 'Poultry', title: 'Pollo Iniciador', desc: 'High-protein starter feed for chicks. Supports healthy development and immune function from day one.', specs: [['Proteína','22%'],['Presentación','40 kg'],['Etapa','Iniciador'],['Línea','La Blanquita']], main: 'images/card/pollo-iniciador.jpg', extra: ['images/carrusel/pollo-iniciador.jpg', 'images/card/pollo-iniciador.jpg'] },
+    'gallina-ponedora': { tag: 'Poultry', title: 'Gallina Ponedora 18%', desc: 'Layer feed formulated for optimal egg production, shell quality and yolk color.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Postura'],['Línea','La Blanquita']], main: 'images/carrusel/gallina-ponedora.jpg', extra: ['images/carrusel/gallina-ponedora.jpg'] },
+    'cerdo-gestante': { tag: 'Swine', title: 'Cerdo Gestante', desc: 'Specialized nutrition for pregnant sows. Supports gestation, fetal development and sow body condition.', specs: [['Proteína','15%'],['Presentación','40 kg'],['Etapa','Gestación'],['Línea','La Blanquita']], main: 'images/card/cerdo-gestante.jpg', extra: ['images/carrusel/cerdo-gestante.jpg', 'images/card/cerdo-gestante.jpg'] },
+    'cerdo-lactante': { tag: 'Swine', title: 'Cerdo Lactante 18%', desc: 'Nutrient-dense feed for lactating sows. Maintains milk production and litter weight gain during nursing.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Lactancia'],['Línea','La Blanquita']], main: 'images/card/cerdo-lactante.jpg', extra: ['images/carrusel/cerdo-lactante.jpg', 'images/card/cerdo-lactante.jpg'] },
+    'cerdo-iniciador': { tag: 'Swine', title: 'Cerdo Iniciador 18%', desc: 'Highly digestible starter feed for piglets. Essential nutrients for a strong foundation and smooth weaning transition.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Iniciador'],['Línea','La Blanquita']], main: 'images/card/cerdo-iniciador.jpg', extra: ['images/carrusel/cerdo-iniciador.jpg', 'images/card/cerdo-iniciador.jpg'] },
+    'cerdo-desarrollo': { tag: 'Swine', title: 'Cerdo Desarrollo 17%', desc: 'Growth-stage feed for pigs. Optimized amino acid profile for skeletal and muscular development.', specs: [['Proteína','17%'],['Presentación','40 kg'],['Etapa','Desarrollo'],['Línea','La Blanquita']], main: 'images/card/cerdo-desarrollo.jpg', extra: ['images/carrusel/cerdo-desarrollo.jpg', 'images/card/cerdo-desarrollo.jpg'] },
+    'cerdo-engorde': { tag: 'Swine', title: 'Cerdo Engorde 16%', desc: 'Finishing feed for pigs. Balanced protein and energy for optimal muscle development and finishing weight.', specs: [['Proteína','16%'],['Presentación','40 kg'],['Etapa','Engorde'],['Línea','La Blanquita']], main: 'images/card/cerdo-engorde.jpg', extra: ['images/carrusel/cerdo-engorde.jpg', 'images/card/cerdo-engorde.jpg'] },
+    'multicerdo': { tag: 'Swine', title: 'Multicerdo 13%', desc: 'Versatile multi-purpose swine feed. Balanced 13% protein for varied herd needs and steady growth.', specs: [['Proteína','13%'],['Presentación','40 kg'],['Etapa','Multietapa'],['Línea','La Blanquita']], main: 'images/card/multicerdo.jpg', extra: ['images/carrusel/multicerdo.jpg', 'images/card/multicerdo.jpg'] },
+    'ceba-engorde-18': { tag: 'Cattle', title: 'Ceba Engorde 18%', desc: 'Finishing feed for cattle. 18% protein optimized for fattening, weight gain and feed efficiency.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Ceba'],['Línea','La Blanquita']], main: 'images/card/ceba-engorde-18.jpg', extra: ['images/carrusel/ceba-engorde-18.jpg', 'images/card/ceba-engorde-18.jpg'] },
+    'vaca-lechera-15': { tag: 'Cattle', title: 'Vaca Lechera 15%', desc: 'Standard dairy cow feed. Balanced 15% protein formulated for steady milk production and herd health.', specs: [['Proteína','15%'],['Presentación','40 kg'],['Etapa','Lactancia'],['Línea','La Blanquita']], main: 'images/card/vaca-lechera-15.jpg', extra: ['images/carrusel/vaca-lechera-15.jpg', 'images/card/vaca-lechera-15.jpg'] },
+    'vaca-lechera-18': { tag: 'Cattle', title: 'Vaca Lechera 18%', desc: 'High-performance dairy feed. 18% protein for elevated milk yield in high-producing herds.', specs: [['Proteína','18%'],['Presentación','40 kg'],['Etapa','Lactancia'],['Línea','La Blanquita']], main: 'images/card/vaca-lechera-18.jpg', extra: ['images/carrusel/vaca-lechera-18.jpg', 'images/card/vaca-lechera-18.jpg'] },
+    'vaca-lechera-premium': { tag: 'Cattle', title: 'Vaca Lechera Premium 21%', desc: 'Premium dairy formula. 21% protein for top-tier herds and maximum milk output per cycle.', specs: [['Proteína','21%'],['Presentación','40 kg'],['Etapa','Lactancia'],['Línea','La Blanquita']], main: 'images/card/vaca-lechera-premium.jpg', extra: ['images/carrusel/vaca-lechera-premium.jpg', 'images/card/vaca-lechera-premium.jpg'] },
+    'multipro-premium': { tag: 'Cattle', title: 'Multipro Premium 15%', desc: 'Premium multi-purpose cattle feed. Higher protein density for diverse herd needs.', specs: [['Proteína','15%'],['Presentación','40 kg'],['Etapa','Multietapa'],['Línea','La Blanquita']], main: 'images/card/multipro-premium.jpg', extra: ['images/carrusel/multipro-premium.jpg', 'images/card/multipro-premium.jpg'] },
+    'multipro-13': { tag: 'Cattle', title: 'Multipro 13%', desc: 'Versatile multi-purpose cattle feed. Balanced 13% protein for general herd maintenance and growth.', specs: [['Proteína','13%'],['Presentación','40 kg'],['Etapa','Multietapa'],['Línea','La Blanquita']], main: 'images/card/multipro-13.jpg', extra: ['images/carrusel/multipro-13.jpg', 'images/card/multipro-13.jpg'] },
+    'multipro-11': { tag: 'Cattle', title: 'Multipro 11%', desc: 'Economy multi-purpose cattle feed. 11% protein for maintenance rations and adult cattle.', specs: [['Proteína','11%'],['Presentación','40 kg'],['Etapa','Mantenimiento'],['Línea','La Blanquita']], main: 'images/card/multipro-11.jpg', extra: ['images/carrusel/multipro-11.jpg', 'images/card/multipro-11.jpg'] },
+    'afrecho-trigo': { tag: 'Otros', title: 'Afrecho Trigo Peletizado', desc: 'Pelletized wheat bran. High-fiber supplement ideal for cattle and other livestock. Improves rumen health.', specs: [['Tipo','Suplemento'],['Presentación','40 kg'],['Uso','Fibra'],['Línea','La Blanquita']], main: 'images/card/afrecho-trigo.jpg', extra: ['images/carrusel/afrecho-trigo.jpg', 'images/card/afrecho-trigo.jpg'] },
+    'harina-maiz': { tag: 'Otros', title: 'Harina Maíz con Grasa', desc: 'Corn flour with added fat. Energy-dense supplement for livestock nutrition. Improves body condition.', specs: [['Tipo','Suplemento'],['Presentación','40 kg'],['Uso','Energía'],['Línea','La Blanquita']], main: 'images/card/harina-maiz.jpg', extra: ['images/carrusel/harina-maiz.jpg', 'images/card/harina-maiz.jpg'] },
+    'melaza': { tag: 'Otros', title: 'Melaza', desc: 'Molasses — high-energy feed supplement. Improves palatability and caloric intake across species.', specs: [['Tipo','Suplemento'],['Presentación','40 kg'],['Uso','Energía'],['Línea','La Blanquita']], main: 'images/card/melaza.jpg', extra: ['images/carrusel/melaza.jpg', 'images/card/melaza.jpg'] },
+  };
+
+  const modal = document.getElementById('productModal');
+  const modalMain = document.getElementById('modalMainImg');
+  const modalThumbs = document.getElementById('modalThumbs');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalTag = document.getElementById('modalTag');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalSpecs = document.getElementById('modalSpecs');
+  const modalClose = document.getElementById('modalClose');
+
+  function openProductModal(key) {
+    const p = PRODUCT_DATA[key];
+    if (!p) return;
+    modalTitle.textContent = p.title;
+    modalTag.textContent = p.tag;
+    modalDesc.textContent = p.desc;
+    modalSpecs.innerHTML = p.specs.map(([l,v]) => `<div class="product-modal__spec"><div class="product-modal__spec-label">${l}</div><div class="product-modal__spec-value">${v}</div></div>`).join('');
+    modalMain.src = p.main;
+    modalMain.alt = p.title;
+    modalThumbs.innerHTML = p.extra.map((src, i) => `<button class="product-modal__thumb ${i===0?'active':''}" data-src="${src}"><img src="${src}" alt="${p.title}"></button>`).join('');
+    modalThumbs.querySelectorAll('.product-modal__thumb').forEach(t => {
+      t.addEventListener('click', () => {
+        modalMain.src = t.dataset.src;
+        modalThumbs.querySelectorAll('.product-modal__thumb').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+      });
+    });
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProductModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Hook into product cards: clicking the image opens the modal
+  document.querySelectorAll('.swiper-slide .product-card').forEach(card => {
+    const img = card.querySelector('.product-img-wrap img');
+    const h3 = card.querySelector('h3');
+    if (!img || !h3) return;
+    const key = (img.alt || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    card.style.cursor = 'zoom-in';
+    card.addEventListener('click', (e) => {
+      // Avoid triggering if user clicked "View Details"
+      if (e.target.closest('.product-link')) return;
+      openProductModal(key);
+    });
+  });
+
+  modalClose.addEventListener('click', closeProductModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeProductModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProductModal(); });
 </script>
 </body>
 </html>
