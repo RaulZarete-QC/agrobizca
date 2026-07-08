@@ -2324,7 +2324,7 @@
       <h2 class="product-modal__title" id="modalTitle"></h2>
       <p class="product-modal__desc" id="modalDesc"></p>
       <div class="product-modal__specs" id="modalSpecs"></div>
-      <a href="#contact" class="product-modal__cta" id="modalCta">
+      <a href="https://wa.link/vj11pc?text=Hola%20AgroBizca%2C%20me%20interesa%20el%20producto%20%7Bproducto%7D" class="product-modal__cta" id="modalCta" target="_blank" rel="noopener">
         <span>Solicitar Cotización</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -2388,6 +2388,11 @@
       document.body.appendChild(modal);
     }
     void modal.offsetWidth;
+    // Update WhatsApp link with product name
+    const cta = document.getElementById('modalCta');
+    if (cta && cta.href.includes('{producto}')) {
+      cta.href = cta.href.replace('{producto}', encodeURIComponent(p.title));
+    }
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.documentElement.style.overflow = 'hidden';
