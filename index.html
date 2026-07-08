@@ -1314,7 +1314,10 @@
       /* === Product Modal / Lightbox === */
       .product-modal {
         position: fixed;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         z-index: 2147483647;
         display: none;
         align-items: center;
@@ -1323,7 +1326,7 @@
         background: rgba(13, 26, 13, 0.92);
         backdrop-filter: blur(8px);
         animation: fadeIn 0.25s ease;
-        isolation: isolate;
+        overflow-y: auto;
       }
       .product-modal.open { display: flex; }
       .product-modal__inner {
@@ -2380,6 +2383,12 @@
         t.classList.add('active');
       });
     });
+    // Move modal to body root to avoid stacking context issues (Swiper transforms)
+    if (modal.parentElement !== document.body) {
+      document.body.appendChild(modal);
+    }
+    // Force reflow before adding class (some browsers batch additions)
+    void modal.offsetWidth;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.documentElement.style.overflow = 'hidden';
