@@ -2389,18 +2389,29 @@
     document.body.style.overflow = '';
   }
 
-  // Hook into product cards: clicking the image opens the modal
-  document.querySelectorAll('.swiper-slide .product-card').forEach(card => {
+  // Event delegation on swiper container (catches clones too)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.product-link');
+    if (link) return; // let "View Details" be a no-op for now
+    const card = e.target.closest('.product-card');
+    if (!card) return;
     const img = card.querySelector('.product-img-wrap img');
-    const h3 = card.querySelector('h3');
-    if (!img || !h3) return;
-    const key = (img.alt || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    card.style.cursor = 'zoom-in';
-    card.addEventListener('click', (e) => {
-      // Avoid triggering if user clicked "View Details"
-      if (e.target.closest('.product-link')) return;
+    if (!img) return;
+    const alt = img.alt || '';
+    let key = alt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    // Handle titles with percentages: "Vaca Lechera 18%" → "vaca-lechera-18"
+    if (!PRODUCT_DATA[key] && alt) {
+      const match = alt.match(/(\d+)%/);
+      if (match) {
+        const stripped = alt.replace(/\s*\d+%\s*$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        if (PRODUCT_DATA[stripped + '-' + match[1]]) key = stripped + '-' + match[1];
+        else if (PRODUCT_DATA[stripped]) key = stripped;
+      }
+    }
+    if (PRODUCT_DATA[key]) {
+      card.style.cursor = 'zoom-in';
       openProductModal(key);
-    });
+    }
   });
 
   modalClose.addEventListener('click', closeProductModal);
