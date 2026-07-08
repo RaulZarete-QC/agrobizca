@@ -1315,14 +1315,15 @@
       .product-modal {
         position: fixed;
         inset: 0;
-        z-index: 9999;
+        z-index: 2147483647;
         display: none;
         align-items: center;
         justify-content: center;
         padding: 24px;
-        background: rgba(13, 26, 13, 0.85);
+        background: rgba(13, 26, 13, 0.92);
         backdrop-filter: blur(8px);
         animation: fadeIn 0.25s ease;
+        isolation: isolate;
       }
       .product-modal.open { display: flex; }
       .product-modal__inner {
@@ -2372,7 +2373,8 @@
     modalMain.alt = p.title;
     modalThumbs.innerHTML = p.extra.map((src, i) => `<button class="product-modal__thumb ${i===0?'active':''}" data-src="${src}"><img src="${src}" alt="${p.title}"></button>`).join('');
     modalThumbs.querySelectorAll('.product-modal__thumb').forEach(t => {
-      t.addEventListener('click', () => {
+      t.addEventListener('click', (ev) => {
+        ev.stopPropagation();
         modalMain.src = t.dataset.src;
         modalThumbs.querySelectorAll('.product-modal__thumb').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
@@ -2380,39 +2382,45 @@
     });
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
   function closeProductModal() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
 
-  // Event delegation on swiper container (catches clones too)
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('.product-link');
-    if (link) return; // let "View Details" be a no-op for now
-    const card = e.target.closest('.product-card');
-    if (!card) return;
-    const img = card.querySelector('.product-img-wrap img');
-    if (!img) return;
-    const alt = img.alt || '';
-    let key = alt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    // Handle titles with percentages: "Vaca Lechera 18%" → "vaca-lechera-18"
-    if (!PRODUCT_DATA[key] && alt) {
-      const match = alt.match(/(\d+)%/);
-      if (match) {
-        const stripped = alt.replace(/\s*\d+%\s*$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        if (PRODUCT_DATA[stripped + '-' + match[1]]) key = stripped + '-' + match[1];
-        else if (PRODUCT_DATA[stripped]) key = stripped;
+  // Event delegation: bind once at document level (catches clones too)
+  if (!window.__productModalBound) {
+    window.__productModalBound = true;
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.product-link');
+      if (link) { e.preventDefault(); return; }
+      const card = e.target.closest('.product-card');
+      if (!card) return;
+      const img = card.querySelector('.product-img-wrap img');
+      if (!img) return;
+      const alt = img.alt || '';
+      let key = alt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      if (!PRODUCT_DATA[key] && alt) {
+        const match = alt.match(/(\d+)%/);
+        if (match) {
+          const stripped = alt.replace(/\s*\d+%\s*$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          if (PRODUCT_DATA[stripped + '-' + match[1]]) key = stripped + '-' + match[1];
+          else if (PRODUCT_DATA[stripped]) key = stripped;
+        }
       }
-    }
-    if (PRODUCT_DATA[key]) {
-      card.style.cursor = 'zoom-in';
-      openProductModal(key);
-    }
-  });
+      if (PRODUCT_DATA[key]) {
+        card.style.cursor = 'zoom-in';
+        e.preventDefault();
+        e.stopPropagation();
+        openProductModal(key);
+      }
+    });
+  }
 
   modalClose.addEventListener('click', closeProductModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) closeProductModal(); });
