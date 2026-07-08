@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agrobizca – Venezuelan Agricultural Excellence</title>
+  <meta name="description" content="Leading Venezuelan agribusiness company. Supplying premium corn, rice, and beans with sustainable practices from farm to table." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ================================================
+       RESET & ROOT
+    ================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark:       #0d1a0d;
+      --green:         #76c442;
+      --green-mid:     #4CAF50;
+      --gold:          #c8a84b;
+      --text-light:    #e8f0e8;
+      --section-light: #f7faf4;
+      --text-dark:     #1a2e1a;
+      --gray-text:     #4a5568;
+      --white:         #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ================================================
+       NAVBAR
+    ================================================ */
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1100px, 92vw);
+      z-index: 1000;
+      background: rgba(13, 26, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(118, 196, 66, 0.2);
+      border-radius: 999px;
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Logo */
+    .nav-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    /* CTA button */
+    .nav-cta {
+      background: var(--green);
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      transition: background 0.2s ease, transform 0.2s ease !important;
+    }
+
+    .nav-cta:hover {
+      background: #68b03a !important;
+      color: var(--white) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(13, 26, 13, 0.97);
+      backdrop-filter: blur(20px);
+      padding: 24px 5%;
+      z-index: 999;
+      border-bottom: 1px solid rgba(118, 196, 66, 0.2);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--green);
+    }
+
+    .mobile-menu .nav-cta {
+      display: inline-block;
+      text-align: center;
+      margin-top: 8px;
+      padding: 14px 24px;
+      border-bottom: none !important;
+    }
+
+    /* ================================================
+       HERO
+    ================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(13, 26, 13, 0.92) 0%,
+        rgba(13, 26, 13, 0.70) 50%,
+        rgba(13, 26, 13, 0.50) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+      max-width: 740px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    /* Hero badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(118, 196, 66, 0.15);
+      border: 1px solid rgba(118, 196, 66, 0.4);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    /* Hero H1 */
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(48px, 7vw, 90px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.3s forwards;
+    }
+
+    .hero h1 em {
+      color: var(--green);
+      font-style: normal;
+    }
+
+    /* Hero subtitle */
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 520px;
+      line-height: 1.7;
+      margin: 0 auto 40px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.5s forwards;
+    }
+
+    /* Hero CTAs */
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.7s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 15px 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .btn-primary:hover::after {
+      left: 150%;
+    }
+
+    .btn-primary:hover {
+      background: #68b03a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(118, 196, 66, 0.4);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 15px 32px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.0s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      color: rgba(255, 255, 255, 0.4);
+      animation: bounce 2s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ================================================
+       FADE-UP ON SCROLL
+    ================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered delays */
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+    .fade-up.delay-5 { transition-delay: 0.5s; }
+
+    /* ================================================
+       STATS BAR
+    ================================================ */
+    .stats-bar {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(118, 196, 66, 0.15);
+      padding: 36px 5%;
+    }
+
+    .stats-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+    }
+
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(118, 196, 66, 0.2);
+    }
+
+    .stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ================================================
+       SECTION SHARED STYLES
+    ================================================ */
+    .section-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: rgba(118, 196, 66, 0.1);
+      border: 1px solid rgba(118, 196, 66, 0.25);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-dark);
+    }
+
+    .section-title.light {
+      color: var(--white);
+    }
+
+    .title-underline {
+      width: 56px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ================================================
+       ABOUT SECTION
+    ================================================ */
+    .about {
+      background: var(--section-light);
+      padding: 100px 5%;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 55% 42%;
+      gap: 6%;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-content .section-badge {
+      margin-bottom: 12px;
+    }
+
+    .about-content .section-title {
+      margin-bottom: 0;
+    }
+
+    .about-text {
+      font-size: 16px;
+      color: var(--gray-text);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .about-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .check-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--green);
+    }
+
+    .location-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .location-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      border: 1px solid rgba(118, 196, 66, 0.3);
+      color: var(--text-dark);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .btn-outline-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--green);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 999px;
+      border: 2px solid var(--green);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-outline-green::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(118,196,66,0.15), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .btn-outline-green:hover::after {
+      left: 150%;
+    }
+
+    .btn-outline-green:hover {
+      background: var(--green);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image-wrap img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.14);
+    }
+
+    /* ================================================
+       PRODUCTS SECTION
+    ================================================ */
+    .products {
+      background: var(--white);
+      padding: 100px 5%;
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .products-header .section-badge {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 12px;
+    }
+
+    .products-header .title-underline {
+      margin: 16px auto 0;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto 48px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: rgba(118, 196, 66, 0.2) 0 20px 40px;
+    }
+
+    .product-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(13, 26, 13, 0.8);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(118, 196, 66, 0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    .product-body {
+      padding: 24px;
+    }
+
+    .product-body h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .product-body p {
+      font-size: 14px;
+      color: var(--gray-text);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 600;
+      transition: gap 0.2s ease;
+    }
+
+    .product-link:hover {
+      gap: 10px;
+    }
+
+    .products-footer {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* ================================================
+       WHY CHOOSE US
+    ================================================ */
+    .why-us {
+      background: var(--bg-dark);
+      padding: 100px 5%;
+    }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .why-header .section-badge {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 12px;
+    }
+
+    .why-header .title-underline {
+      margin: 16px auto 0;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .why-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(118, 196, 66, 0.12);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    }
+
+    .why-card:hover {
+      border-color: rgba(118, 196, 66, 0.4);
+      transform: translateY(-6px);
+      background: rgba(118, 196, 66, 0.04);
+    }
+
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(118, 196, 66, 0.12);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .why-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--green);
+    }
+
+    .why-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .why-card p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.75;
+    }
+
+    /* ================================================
+       CTA BANNER
+    ================================================ */
+    .cta-banner {
+      position: relative;
+      padding: 100px 5%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cta-banner-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .cta-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(13, 26, 13, 0.88);
+    }
+
+    .cta-banner-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-banner h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .cta-banner p {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 40px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .btn-gold:hover::after {
+      left: 150%;
+    }
+
+    .btn-gold:hover {
+      background: #b8933a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200, 168, 75, 0.4);
+    }
+
+    /* ================================================
+       CONTACT PREVIEW
+    ================================================ */
+    .contact-preview {
+      background: var(--section-light);
+      padding: 100px 5%;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    /* Form side */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .contact-form h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .contact-form p.form-sub {
+      font-size: 15px;
+      color: var(--gray-text);
+      line-height: 1.6;
+    }
+
+    .form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(0,0,0,0.12);
+      padding: 10px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s ease;
+      resize: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(0,0,0,0.25);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-bottom-color: var(--green);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* Info side */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .contact-info p.info-sub {
+      font-size: 15px;
+      color: var(--gray-text);
+      line-height: 1.7;
+    }
+
+    .info-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(118, 196, 66, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green);
+    }
+
+    .info-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .info-item-text span:first-child {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+    }
+
+    .info-item-text span:last-child {
+      font-size: 15px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .location-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .location-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .location-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .location-card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .location-card-text strong {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .location-card-text span {
+      font-size: 13px;
+      color: var(--gray-text);
+    }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+    .footer {
+      background: var(--bg-dark);
+      padding: 64px 5% 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 40% 30% 30%;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 48px;
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 22px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.8;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--green);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .footer-contact-item span {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      max-width: 1200px;
+      margin: 0 auto 28px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image-wrap {
+        order: -1;
+      }
+
+      .about-image-wrap img {
+        height: 320px;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-content {
+        padding-left: 5%;
+        padding-right: 5%;
+        text-align: center;
+        max-width: 100%;
+      }
+
+      .hero-badge {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .hero-sub {
+        margin: 0 auto 40px;
+      }
+
+      .stats-inner {
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      .stat-item {
+        width: 50%;
+        flex: none;
+      }
+
+      .stat-item:nth-child(2) {
+        border-left: 1px solid rgba(118, 196, 66, 0.2);
+      }
+
+      .stat-item:nth-child(3) {
+        border-top: 1px solid rgba(118, 196, 66, 0.1);
+        border-left: none;
+      }
+
+      .stat-item:nth-child(4) {
+        border-top: 1px solid rgba(118, 196, 66, 0.1);
+        border-left: 1px solid rgba(118, 196, 66, 0.2);
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about { padding: 64px 5%; }
+      .products { padding: 64px 5%; }
+      .why-us { padding: 64px 5%; }
+      .cta-banner { padding: 72px 5%; }
+      .contact-preview { padding: 64px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================
+       NAVBAR
+  ================================================ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:8px;"><span style="letter-spacing:-0.5px;color:#ffffff;">AgroBiz</span><img src="images/logo-agrobiz.png" alt="AgroBiz" style="height:40px;width:40px;object-fit:contain;mix-blend-mode:screen;filter:brightness(1.2);" /></a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Products</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#" class="nav-cta">Get Quote</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Our Products</a>
+    <a href="#">Contact Us</a>
+    <a href="#" class="nav-cta">Get Quote</a>
+  </div>
+
+
+  <!-- ================================================
+       HERO
+  ================================================ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      
+
+      <h1>Leading the Way for <em>Agribusiness</em></h1>
+
+      <p class="hero-sub">
+        Premium-quality grains and legumes sourced sustainably from Venezuela's fertile heartland delivered with trust, speed, and integrity.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">
+          Explore Products
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-outline">
+          Get a Quote
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       STATS BAR
+  ================================================ -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item fade-up">
+        <span class="stat-number" data-target="2" data-suffix="">2</span>
+        <span class="stat-label">Locations</span>
+      </div>
+      <div class="stat-item fade-up delay-1">
+        <span class="stat-number" data-target="6" data-suffix="+">6+</span>
+        <span class="stat-label">Products</span>
+      </div>
+      <div class="stat-item fade-up delay-2">
+        <span class="stat-number" data-target="100" data-suffix="%">100%</span>
+        <span class="stat-label">Natural</span>
+      </div>
+      <div class="stat-item fade-up delay-3">
+        <span class="stat-number" data-target="0" data-suffix="" data-text="VEN">VEN</span>
+        <span class="stat-label">Venezuela</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       ABOUT SECTION
+  ================================================ -->
+  <section class="about">
+    <div class="about-grid">
+      <!-- Text -->
+      <div class="about-content">
+        <span class="section-badge fade-up">Who We Are</span>
+        <h2 class="section-title fade-up delay-1">Rooted in Venezuela,<br>Growing for the World</h2>
+        <div class="title-underline fade-up delay-2"></div>
+
+        <p class="about-text fade-up delay-2">
+          Agrobizca is a Venezuelan capital company dedicated to the commercialization and distribution of agricultural products. We connect Venezuela's agricultural wealth with the markets that need it most, ensuring quality at every step of the supply chain.
+        </p>
+        <p class="about-text fade-up delay-3">
+          With a commitment to sustainable practices and community development, we bridge the gap between farmers and consumers delivering fresh, natural, and certified products with transparency and care.
+        </p>
+
+        <ul class="about-bullets fade-up delay-3">
+          <li>
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Venezuelan Capital Company
+          </li>
+          <li>
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Sustainable Development Practices
+          </li>
+          <li>
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Quality Guaranteed at Every Step
+          </li>
+        </ul>
+
+        <div class="location-pills fade-up delay-4">
+          <a href="https://maps.app.goo.gl/4qzwziZJTGq8yQW16" target="_blank" class="location-pill" style="text-decoration:none;">📍 Caracas</a>
+          <a href="https://maps.app.goo.gl/bMjwbWfHoXXU4rvi9" target="_blank" class="location-pill" style="text-decoration:none;">📍 Acarigua</a>
+        </div>
+
+        <a href="#" class="btn-outline-green fade-up delay-4">
+          Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Image -->
+      <div class="about-image-wrap fade-up delay-2">
+        <img
+          src="images/farm.jpg"
+          alt="Venezuelan agricultural fields"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       PRODUCTS SECTION
+  ================================================ -->
+  <section class="products">
+    <div class="products-header">
+      <span class="section-badge fade-up">Our Products</span>
+      <h2 class="section-title fade-up delay-1">Premium Agricultural Products</h2>
+      <div class="title-underline fade-up delay-2"></div>
+    </div>
+
+    <!-- Swiper Carousel -->
+    <div class="swiper productSwiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Poultry</span></div>
+            <div class="product-body"><h3>Pollo Engorde</h3><p>Complete balanced feed for broiler chickens. Maximizes weight gain and performance. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Poultry</span></div>
+            <div class="product-body"><h3>Pollo Iniciador</h3><p>High-protein starter feed for chicks. Supports healthy development from day one. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Swine</span></div>
+            <div class="product-body"><h3>Cerdo Engorde 16%</h3><p>Finishing feed for pigs. 16% protein for optimal muscle development and weight gain. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Swine</span></div>
+            <div class="product-body"><h3>Cerdo Desarrollo 18%</h3><p>Growth-stage feed for pigs. 18% protein for skeletal and muscular development. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Swine</span></div>
+            <div class="product-body"><h3>Cerdo Iniciador</h3><p>Highly digestible starter feed for piglets. Essential nutrients for a strong foundation. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Swine</span></div>
+            <div class="product-body"><h3>Cerdo Gestante</h3><p>Specialized nutrition for pregnant sows. Supports gestation, fetal development and sow health. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img-wrap" style="background:#f0f7ea;"><span class="product-tag">Swine</span></div>
+            <div class="product-body"><h3>Cerdo Lactante</h3><p>Nutrient-dense feed for lactating sows. Maintains milk production during nursing. 40 kg bags.</p><a href="#" class="product-link">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="products-footer fade-up">
+      <a href="#" class="btn-outline-green">
+        View All Products
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       WHY CHOOSE US
+  ================================================ -->
+  <section class="why-us">
+    <div class="why-header">
+      <span class="section-badge fade-up">Why Choose Us</span>
+      <h2 class="section-title light fade-up delay-1">Built on Trust,<br>Delivered with Excellence</h2>
+      <div class="title-underline fade-up delay-2"></div>
+    </div>
+
+    <div class="why-grid">
+      <!-- 100% Natural -->
+      <div class="why-card fade-up delay-1">
+        <div class="why-icon">
+          <!-- Leaf SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </div>
+        <h3>100% Natural</h3>
+        <p>All our products are grown without synthetic additives. Pure agricultural quality, straight from Venezuela's fertile lands to your supply chain.</p>
+      </div>
+
+      <!-- Fast Delivery -->
+      <div class="why-card fade-up delay-2">
+        <div class="why-icon">
+          <!-- Truck SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <path d="M16 8h4l3 3v5h-7V8z"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <h3>Fast Delivery</h3>
+        <p>Efficient logistics across Venezuela and beyond. We coordinate bulk shipments with precision to keep your operations running on schedule.</p>
+      </div>
+
+      <!-- Quality Certified -->
+      <div class="why-card fade-up delay-3">
+        <div class="why-icon">
+          <!-- Shield check SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3>Quality Certified</h3>
+        <p>Every batch meets strict quality standards. From field inspections to final packaging, we guarantee consistency you can depend on.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       CTA BANNER
+  ================================================ -->
+  <section class="cta-banner">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-overlay"></div>
+    <div class="cta-banner-content fade-up">
+      <h2>Ready to Partner With Us?</h2>
+      <p>Join a growing network of trusted businesses that rely on Agrobizca for premium agricultural products. Let's build a lasting partnership.</p>
+      <a href="#" class="btn-gold">
+        Contact Us Today
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       CONTACT PREVIEW
+  ================================================ -->
+  <section class="contact-preview">
+    <div class="contact-grid">
+      <!-- Form -->
+      <div class="contact-form fade-up">
+        <div>
+          <h2>Send Us a Message</h2>
+          <p class="form-sub">Fill in the form and our team will get back to you within 24 hours.</p>
+        </div>
+
+        <form class="form-fields" action="contact.html" method="get">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="John Doe" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="john@company.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your needs..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info fade-up delay-2">
+        <div>
+          <h3>Contact Us</h3>
+          <p class="info-sub">We're here to help. Reach out through any of the channels below and we'll connect you with the right team.</p>
+        </div>
+
+        <div class="info-items">
+          <div class="info-item">
+            <div class="info-icon">
+              <!-- Phone SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6.09 6.09l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="info-item-text">
+              <span>Phone / WhatsApp</span>
+              <a href="https://wa.link/vj11pc" target="_blank" style="color:var(--green);font-weight:600;">+58-414-5584566</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <!-- Email SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="info-item-text">
+              <span>Email</span>
+              <span>info@agrobizca.com</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <!-- Instagram SVG -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="info-item-text">
+              <span>Instagram</span>
+              <a href="https://www.instagram.com/agrobizca?igsh=dDJ6ZHFrdnU5azJq" target="_blank" style="color:var(--green);font-weight:600;">@agrobizca</a>
+            </div>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <div class="info-item-text">
+              <span>LinkedIn</span>
+              <a href="https://ve.linkedin.com/in/agrobiz-c-a-6b47a8255" target="_blank" style="color:var(--green);font-weight:600;">AgroBiz C.A.</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-text); margin-bottom: 12px;">Our Locations</p>
+          <div class="location-cards">
+            <div class="location-card">
+              <div class="location-dot"></div>
+              <div class="location-card-text">
+                <strong>Caracas</strong>
+                <a href="https://maps.app.goo.gl/4qzwziZJTGq8yQW16" target="_blank" style="color:var(--green);font-size:13px;">Torre El Rosal, Caracas 1060, Miranda</a>
+              </div>
+            </div>
+            <div class="location-card">
+              <div class="location-dot"></div>
+              <div class="location-card-text">
+                <strong>Acarigua</strong>
+                <a href="https://maps.app.goo.gl/bMjwbWfHoXXU4rvi9" target="_blank" style="color:var(--green);font-size:13px;">Calle Principal, Local #49, Zona Industrial, Araure, Portuguesa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       FOOTER
+  ================================================ -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Agro<span>Biz</span></a>
+        <p>A Venezuelan capital company committed to agricultural excellence bridging farmers and markets with quality, trust, and sustainability.</p>
+      </div>
+
+      <!-- Pages -->
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Products</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>info@agrobizca.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Caracas & Acarigua, VE</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <a href="https://www.instagram.com/agrobizca?igsh=dDJ6ZHFrdnU5azJq" target="_blank" style="color:rgba(255,255,255,0.7);">@agrobizca</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          <a href="https://ve.linkedin.com/in/agrobiz-c-a-6b47a8255" target="_blank" style="color:rgba(255,255,255,0.7);">AgroBiz C.A.</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <p class="footer-bottom">
+      &copy; 2025 Agrobizca. All rights reserved. Made in Venezuela 🇻🇪
+    </p>
+  </footer>
+
+
+  <!-- ================================================
+       JAVASCRIPT
+  ================================================ -->
+  <script>
+    // ── 1. NAVBAR SCROLL SHADOW ──────────────────────
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+
+    // ── 2. HAMBURGER MENU TOGGLE ──────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.classList.toggle('open');
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+
+    // ── 3. FADE-UP ON SCROLL (IntersectionObserver) ──────
+    const fadeEls = document.querySelectorAll('.fade-up');
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    fadeEls.forEach(el => fadeObserver.observe(el));
+
+
+    // ── 4. STATS COUNTER ANIMATION ────────────────────
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target'), 10);
+          const suffix = el.getAttribute('data-suffix') || '';
+          const staticText = el.getAttribute('data-text');
+
+          // If it's a static text (like VEN), just mark visible and skip
+          if (staticText) {
+            counterObserver.unobserve(el);
+            return;
+          }
+
+          const duration = 1500;
+          const start = performance.now();
+
+          const animate = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(eased * target);
+            el.textContent = current + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              el.textContent = target + suffix;
+            }
+          };
+
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+
+    // ── 5. ACTIVE NAV LINK HIGHLIGHT ─────────────────
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage && !link.classList.contains('nav-cta')) {
+        link.style.color = 'var(--green)';
+      }
+    });
+  </script>
+
+<!-- Swiper JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    .productSwiper {
+      width: 100%;
+      padding: 20px 0 60px !important;
+    }
+    .productSwiper .swiper-slide {
+      width: 320px;
+      height: auto;
+    }
+    .productSwiper .swiper-slide .product-card {
+      height: 100%;
+      margin: 0;
+    }
+    .productSwiper .swiper-button-prev,
+    .productSwiper .swiper-button-next {
+      color: #4a7c2f;
+      background: rgba(255,255,255,0.95);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .productSwiper .swiper-button-prev::after,
+    .productSwiper .swiper-button-next::after {
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .productSwiper .swiper-pagination-bullet {
+      background: #4a7c2f;
+      opacity: 0.3;
+    }
+    .productSwiper .swiper-pagination-bullet-active {
+      opacity: 1;
+      width: 24px;
+      border-radius: 4px;
+    }
+  </style>
+  <script>
+    var productSwiper = new Swiper('.productSwiper', {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      grabCursor: true,
+      keyboard: { enabled: true },
+      breakpoints: {
+        0:   { slidesPerView: 1, centeredSlides: true },
+        640: { slidesPerView: 2, centeredSlides: false },
+        1024: { slidesPerView: 3, centeredSlides: false },
+      },
+    });
+  </script>
+  <script>
+  (function(){
+    var track = document.getElementById('carouselTrack');
+    if (!track) return;
+    var cards = track.querySelectorAll('.product-card');
+    var total = cards.length;
+    var current = 0;
+    var autoTimer = null;
+    var paused = false;
+
+    function cardW() {
+      return cards[0].offsetWidth + 24;
+    }
+    function visible() {
+      var w = track.parentElement.offsetWidth;
+      if (w < 400) return 1;
+      if (w < 750) return 2;
+      return 3;
+    }
+    function maxIdx() {
+      return Math.max(0, total - visible());
+    }
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, maxIdx()));
+      track.style.transform = 'translateX(-' + (current * cardW()) + 'px)';
+    }
+    window.carouselMove = function(dir) {
+      resetAuto();
+      var next = current + dir;
+      // loop: si pasa del final, vuelve al inicio
+      if (next > maxIdx()) next = 0;
+      if (next < 0) next = maxIdx();
+      goTo(next);
+    };
+
+    // Autoplay: avanza una card cada 3.5s
+    function startAuto() {
+      autoTimer = setInterval(function() {
+        if (paused) return;
+        var next = current + 1;
+        if (next > maxIdx()) next = 0;
+        goTo(next);
+      }, 3500);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    // Pausa al hover
+    track.parentElement.parentElement.addEventListener('mouseenter', function(){ paused = true; });
+    track.parentElement.parentElement.addEventListener('mouseleave', function(){ paused = false; });
+
+    // Swipe touch
+    var startX = 0;
+    track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', function(e){
+      var d = startX - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 60) { resetAuto(); carouselMove(d > 0 ? 1 : -1); }
+    });
+
+    // Drag mouse
+    var mStart = 0, dragging = false;
+    track.addEventListener('mousedown', function(e){ mStart = e.clientX; dragging = true; track.style.cursor = 'grabbing'; });
+    document.addEventListener('mouseup', function(e){
+      if (!dragging) return;
+      dragging = false;
+      track.style.cursor = 'grab';
+      var d = mStart - e.clientX;
+      if (Math.abs(d) > 60) { resetAuto(); carouselMove(d > 0 ? 1 : -1); }
+    });
+
+    startAuto();
+  })();
+</script>
+</body>
+</html>

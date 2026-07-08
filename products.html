@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Products – Agrobiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #4a7c2f;
+      --green-dark: #2e5a1b;
+      --green-light:#6aaa3f;
+      --yellow:     #f5a623;
+      --white:      #ffffff;
+      --light:      #f4f7f0;
+      --gray:       #666;
+      --dark:       #222;
+    }
+
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .topbar a { color: #fff; }
+    .topbar .social { margin-left: auto; display: flex; gap: 12px; }
+    .topbar .social a { font-size: 15px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff;
+      border-bottom: 3px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--green-dark);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--yellow); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--dark);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a.active { color: var(--green); border-bottom: 2px solid var(--green); padding-bottom: 2px; }
+
+    /* ── PAGE HERO (small) ── */
+    .page-hero {
+      background: linear-gradient(135deg, #2e5a1b 0%, #4a7c2f 60%, #6aaa3f 100%);
+      padding: 70px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1400&q=80') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(30px, 5vw, 52px);
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      margin-bottom: 12px;
+    }
+    .page-hero p { color: rgba(255,255,255,0.85); font-size: 16px; }
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 14px;
+    }
+    .breadcrumb a { color: var(--yellow); }
+    .breadcrumb span { color: rgba(255,255,255,0.5); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 70px 40px; }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--yellow);
+      margin: 14px 0 28px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green-dark); }
+    .btn-yellow { background: var(--yellow); color: #fff; }
+    .btn-yellow:hover { opacity: 0.9; }
+
+    /* ── PRODUCTS GRID ── */
+    .products-section { background: var(--light); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+    .product-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+    .product-card-body {
+      padding: 28px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-tag {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .product-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      flex: 1;
+    }
+    .product-card-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .product-attr {
+      background: var(--light);
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── CATALOG CTA ── */
+    .catalog-cta {
+      background: var(--green-dark);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .catalog-cta h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3vw, 32px);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .catalog-cta p {
+      color: rgba(255,255,255,0.8);
+      font-size: 15px;
+      margin-bottom: 28px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── WHY ── */
+    .why { background: var(--white); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .why-item { text-align: center; padding: 32px 20px; }
+    .why-icon { font-size: 48px; margin-bottom: 16px; }
+    .why-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+    }
+    .why-item p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 48px 40px 24px;
+    }
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: 14px; display: block; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; }
+    footer h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul li a { font-size: 13px; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    footer ul li a:hover { color: var(--yellow); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 900px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .products-grid, .why-grid, .footer-grid { grid-template-columns: 1fr; }
+      nav { padding: 14px 20px; }
+      section { padding: 48px 20px; }
+      .topbar { padding: 8px 20px; font-size: 12px; }
+      .page-hero { padding: 50px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span>📞 <a href="tel:+584145584566">+58-414-5584566</a></span>
+    <span>✉️ <a href="mailto:agrobiz@agrobizca.com">agrobiz@agrobizca.com</a></span>
+    <div class="social">
+      <a href="https://www.instagram.com/agrobizca" target="_blank">📷 Instagram</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">Agro<span>Biz</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html" class="active">Our Products</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>Our Products</h1>
+      <p>High-quality agricultural products for your farm and livestock</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Our Products</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products-section">
+    <div class="container">
+      <p class="section-sub">What We Offer</p>
+      <h2 class="section-title">Our Full Product Catalog</h2>
+      <div class="divider"></div>
+      <p style="color:var(--gray); max-width:650px;">From grains to legumes, we offer a wide range of carefully selected and processed agricultural products. Everything your farm animals need, sourced from Venezuelan territory.</p>
+
+      <div class="products-grid">
+
+        <!-- Corn -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1620574387735-3624d75b2dbc?w=600&q=80" alt="Corn" />
+          <div class="product-card-body">
+            <span class="product-tag">Grain</span>
+            <h3>Corn (Maíz)</h3>
+            <p>A highly nourishing food grain essential for livestock diets. Our corn is ideal for cattle, porcine, and poultry, providing the energy and carbohydrates that animals need to thrive. Sourced directly from Venezuelan agricultural zones.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">🐄 Cattle</span>
+              <span class="product-attr">🐷 Porcine</span>
+              <span class="product-attr">🐔 Poultry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rice -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600&q=80" alt="Rice" />
+          <div class="product-card-body">
+            <span class="product-tag">Cereal</span>
+            <h3>Rice (Arroz)</h3>
+            <p>A premium cereal grain delivering excellent quantities of vitamins and minerals. Our rice products support the nutritional balance of livestock, promoting healthy growth and strong immune systems. Just what your animals need.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">🐄 Livestock</span>
+              <span class="product-attr">💊 Vitamins & Minerals</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beans -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=600&q=80" alt="Beans" />
+          <div class="product-card-body">
+            <span class="product-tag">Legume</span>
+            <h3>Beans (Caraotas)</h3>
+            <p>Rich in proteins, minerals, and fiber — an ideal complement for a healthy and sustainable livestock diet. Our beans are harvested in Venezuelan territory, providing a natural and affordable protein source for your farm animals.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">💪 High Protein</span>
+              <span class="product-attr">🌿 Venezuelan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sorghum -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=600&q=80" alt="Sorghum" />
+          <div class="product-card-body">
+            <span class="product-tag">Grain</span>
+            <h3>Sorghum (Sorgo)</h3>
+            <p>A drought-resistant grain crop widely used in animal feed formulations. Sorghum provides high energy content and is an excellent alternative to corn in livestock diets. Packed with carbohydrates and essential nutrients for optimal animal growth.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">🐄 Cattle</span>
+              <span class="product-attr">⚡ High Energy</span>
+              <span class="product-attr">🌾 Grain</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Soy -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Soy" />
+          <div class="product-card-body">
+            <span class="product-tag">Legume</span>
+            <h3>Soy (Soja)</h3>
+            <p>One of the world's most important protein-rich crops for animal nutrition. Soybean meal is a cornerstone ingredient in commercial animal feed, offering a complete amino acid profile that supports muscle development and overall health in farm animals.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">💪 High Protein</span>
+              <span class="product-attr">🐔 Poultry</span>
+              <span class="product-attr">🐷 Porcine</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animal Feed -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Animal Feed" />
+          <div class="product-card-body">
+            <span class="product-tag">Balanced Feed</span>
+            <h3>Animal Feed (Alimento Balanceado)</h3>
+            <p>Our balanced animal feed blends the best of our product catalog into a complete, nutritionally optimized formula. Designed specifically for farm animals, it combines grains, cereals, and legumes to meet the daily dietary requirements of your livestock.</p>
+            <div class="product-card-footer">
+              <span class="product-attr">🐄 All Livestock</span>
+              <span class="product-attr">✅ Complete Diet</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG CTA -->
+  <div class="catalog-cta">
+    <h2>Interested in Our Full Catalog?</h2>
+    <p>Download our complete product catalog with specifications, packaging options, and bulk pricing information.</p>
+    <a href="#" class="btn btn-yellow" onclick="return false;" title="Catalog download coming soon">⬇ Download Catalog</a>
+  </div>
+
+  <!-- WHY US -->
+  <section class="why">
+    <div class="container">
+      <div style="text-align:center">
+        <p class="section-sub">Why Choose Us</p>
+        <h2 class="section-title">Quality You Can Trust</h2>
+        <div class="divider" style="margin: 14px auto 28px"></div>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🌱</div>
+          <h3>100% Natural</h3>
+          <p>All our products come from sustainable agricultural practices in Venezuelan territory.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🚚</div>
+          <h3>Fast Delivery</h3>
+          <p>We deliver across Venezuela from our distribution centers in Caracas and Acarigua.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">✅</div>
+          <h3>Quality Certified</h3>
+          <p>Every batch is quality-checked before leaving our facilities to ensure the best for your farm.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Agro<span style="color:var(--yellow)">Biz</span></a>
+        <p>Venezuelan capital company dedicated to the processing of products of agricultural origin. Quality and sustainability in every product.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+584145584566">+58-414-5584566</a></li>
+          <li><a href="mailto:agrobiz@agrobizca.com">agrobiz@agrobizca.com</a></li>
+          <li><a href="https://www.instagram.com/agrobizca" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Copyright Protected. All Rights Reserved by: Agrobizca
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – Agrobiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #4a7c2f;
+      --green-dark: #2e5a1b;
+      --green-light:#6aaa3f;
+      --yellow:     #f5a623;
+      --white:      #ffffff;
+      --light:      #f4f7f0;
+      --gray:       #666;
+      --dark:       #222;
+    }
+
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: var(--white); }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .topbar a { color: #fff; }
+    .topbar .social { margin-left: auto; display: flex; gap: 12px; }
+    .topbar .social a { font-size: 15px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff;
+      border-bottom: 3px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--green-dark);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--yellow); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--dark);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a.active { color: var(--green); border-bottom: 2px solid var(--green); padding-bottom: 2px; }
+
+    /* ── PAGE HERO (small) ── */
+    .page-hero {
+      background: linear-gradient(135deg, #2e5a1b 0%, #4a7c2f 60%, #6aaa3f 100%);
+      padding: 70px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1400&q=80') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(30px, 5vw, 52px);
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      margin-bottom: 12px;
+    }
+    .page-hero p {
+      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+    }
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 14px;
+    }
+    .breadcrumb a { color: var(--yellow); }
+    .breadcrumb span { color: rgba(255,255,255,0.5); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 70px 40px; }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--yellow);
+      margin: 14px 0 28px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: var(--green-dark); }
+    .btn-yellow { background: var(--yellow); color: #fff; }
+    .btn-yellow:hover { opacity: 0.9; }
+
+    /* ── WHO WE ARE ── */
+    .who-we-are { background: var(--white); }
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .who-text p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .who-img img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ── MISSION ── */
+    .mission { background: var(--light); }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .mission-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      border-top: 4px solid var(--green);
+    }
+    .mission-icon { font-size: 44px; margin-bottom: 18px; }
+    .mission-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+    .mission-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* ── LOCATIONS ── */
+    .locations { background: var(--white); }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .location-card {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 36px 32px;
+      border-left: 5px solid var(--green);
+    }
+    .location-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .location-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 10px;
+    }
+    .location-card p strong { color: var(--dark); min-width: 70px; }
+
+    /* ── VALUES STRIP ── */
+    .values-strip {
+      background: var(--green-dark);
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .values-strip h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3vw, 32px);
+      color: #fff;
+      margin-bottom: 32px;
+    }
+    .values-row {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .value-item {
+      color: rgba(255,255,255,0.9);
+    }
+    .value-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 42px;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .value-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 48px 40px 24px;
+    }
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: 14px; display: block; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; }
+    footer h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul li a { font-size: 13px; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    footer ul li a:hover { color: var(--yellow); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .who-grid, .locations-grid, .footer-grid { grid-template-columns: 1fr; }
+      .mission-grid, .values-row { grid-template-columns: 1fr; }
+      nav { padding: 14px 20px; }
+      section { padding: 48px 20px; }
+      .topbar { padding: 8px 20px; font-size: 12px; }
+      .page-hero { padding: 50px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span>📞 <a href="tel:+584145584566">+58-414-5584566</a></span>
+    <span>✉️ <a href="mailto:agrobiz@agrobizca.com">agrobiz@agrobizca.com</a></span>
+    <div class="social">
+      <a href="https://www.instagram.com/agrobizca" target="_blank">📷 Instagram</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">Agro<span>Biz</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="products.html">Our Products</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <h1>About Us</h1>
+      <p>Learn who we are, what we stand for, and where we operate</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>About Us</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO WE ARE -->
+  <section class="who-we-are">
+    <div class="container">
+      <div class="who-grid">
+        <div class="who-text">
+          <p class="section-sub">Who We Are</p>
+          <h2 class="section-title">A Venezuelan Company Built on Quality</h2>
+          <div class="divider"></div>
+          <p>Agrobiz is a Venezuelan capital company dedicated to the processing of products of agricultural origin. Founded with a strong commitment to the agricultural heritage of Venezuela, we bring the best of our land to farms and producers across the country.</p>
+          <p>Our team is built on hard work, perseverance, and an unwavering dedication to quality. Every product that leaves our facilities has been handled with care and processed to meet the highest standards.</p>
+          <p>We believe in sustainable development — protecting the land that feeds us while maximizing the value we deliver to our customers. Venezuelan soil is rich, and we honor it through responsible agricultural practices.</p>
+          <br>
+          <a href="products.html" class="btn btn-green">See Our Products</a>
+        </div>
+        <div class="who-img">
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80" alt="Agrobiz Farm" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission">
+    <div class="container">
+      <div style="text-align: center;">
+        <p class="section-sub">Our Purpose</p>
+        <h2 class="section-title">Our Mission</h2>
+        <div class="divider" style="margin: 14px auto 12px;"></div>
+        <p style="color:var(--gray); max-width:650px; margin: 0 auto 0;">We exist to provide high-quality agricultural products that support the health and productivity of farm animals across Venezuela and beyond.</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-icon">🌾</div>
+          <h3>Quality Products</h3>
+          <p>We source and process only the finest grains, cereals, and legumes — ensuring consistent quality in every delivery for your livestock and farm animals.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">🤝</div>
+          <h3>Reliable Partnerships</h3>
+          <p>We build long-term relationships with farmers, distributors, and agribusiness operators. Reliability and trust are at the core of everything we do.</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">🌿</div>
+          <h3>Sustainable Development</h3>
+          <p>Our operations are guided by a commitment to the environment. We harvest with sustainable development in mind, protecting Venezuela's natural resources for future generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES STRIP -->
+  <div class="values-strip">
+    <h2>Agrobiz by the Numbers</h2>
+    <div class="values-row">
+      <div class="value-item">
+        <div class="value-num">100%</div>
+        <div class="value-label">Venezuelan Capital</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">2</div>
+        <div class="value-label">Locations Nationwide</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">6+</div>
+        <div class="value-label">Agricultural Products</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">∞</div>
+        <div class="value-label">Commitment to Quality</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATIONS -->
+  <section class="locations">
+    <div class="container">
+      <p class="section-sub">Where to Find Us</p>
+      <h2 class="section-title">Our Locations</h2>
+      <div class="divider"></div>
+      <p style="color:var(--gray); margin-bottom:0;">We operate from two strategic locations in Venezuela, ensuring we can serve customers across the country efficiently.</p>
+      <div class="locations-grid">
+        <div class="location-card">
+          <h3>📍 Caracas</h3>
+          <p><strong>Address:</strong> Calle San Felipe, Centro Coinasa PH-A Sur</p>
+          <p><strong>State:</strong> Distrito Capital, Venezuela</p>
+          <p><strong>Role:</strong> Corporate Headquarters &amp; Distribution</p>
+          <p><strong>Phone:</strong> <a href="tel:+584145584566" style="color:var(--green);">+58-414-5584566</a></p>
+          <p><strong>Email:</strong> <a href="mailto:agrobiz@agrobizca.com" style="color:var(--green);">agrobiz@agrobizca.com</a></p>
+        </div>
+        <div class="location-card">
+          <h3>📍 Acarigua</h3>
+          <p><strong>Address:</strong> Calle Principal, Zona Industrial</p>
+          <p><strong>City:</strong> Araure, Portuguesa, Venezuela</p>
+          <p><strong>Role:</strong> Processing &amp; Agricultural Operations</p>
+          <p><strong>Phone:</strong> <a href="tel:+584145584566" style="color:var(--green);">+58-414-5584566</a></p>
+          <p><strong>Email:</strong> <a href="mailto:agrobiz@agrobizca.com" style="color:var(--green);">agrobiz@agrobizca.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Agro<span style="color:var(--yellow)">Biz</span></a>
+        <p>Venezuelan capital company dedicated to the processing of products of agricultural origin. Quality and sustainability in every product.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+584145584566">+58-414-5584566</a></li>
+          <li><a href="mailto:agrobiz@agrobizca.com">agrobiz@agrobizca.com</a></li>
+          <li><a href="https://www.instagram.com/agrobizca" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Copyright Protected. All Rights Reserved by: Agrobizca
+    </div>
+  </footer>
+
+</body>
+</html>
