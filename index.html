@@ -2395,19 +2395,31 @@
     }
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
+    // Belt-and-suspenders: force inline styles so cache/ext issues can't break layout
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.zIndex = '2147483647';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.background = 'rgba(13, 26, 13, 0.92)';
+    modal.style.padding = '24px';
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    // Move focus into the modal so aria-hidden doesn't trap it
     setTimeout(() => modalClose.focus(), 50);
   }
 
   function closeProductModal() {
-    // Remove focus from any element inside the modal BEFORE setting aria-hidden
     if (document.activeElement && modal.contains(document.activeElement)) {
       document.activeElement.blur();
     }
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+    // Clear inline styles so CSS can take over again
+    modal.style.cssText = '';
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
