@@ -42,6 +42,11 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    section[id] {
+      scroll-margin-top: 100px;
     }
 
     body {
@@ -1332,10 +1337,10 @@
 
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Our Products</a></li>
-      <li><a href="#">Contact Us</a></li>
-      <li><a href="#" class="nav-cta">Get Quote</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#products">Our Products</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#contact" class="nav-cta">Get Quote</a></li>
     </ul>
 
     <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
@@ -1348,10 +1353,10 @@
   <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Our Products</a>
-    <a href="#">Contact Us</a>
-    <a href="#" class="nav-cta">Get Quote</a>
+    <a href="#about">About Us</a>
+    <a href="#products">Our Products</a>
+    <a href="#contact">Contact Us</a>
+    <a href="#contact" class="nav-cta">Get Quote</a>
   </div>
 
 
@@ -1419,7 +1424,7 @@
   <!-- ================================================
        ABOUT SECTION
   ================================================ -->
-  <section class="about">
+  <section class="about" id="about">
     <div class="about-grid">
       <!-- Text -->
       <div class="about-content">
@@ -1475,7 +1480,7 @@
   <!-- ================================================
        PRODUCTS SECTION
   ================================================ -->
-  <section class="products">
+  <section class="products" id="products">
     <div class="products-header">
       <span class="section-badge fade-up">Our Products</span>
       <h2 class="section-title fade-up delay-1">Premium Agricultural Products</h2>
@@ -1698,7 +1703,7 @@
     <div class="cta-banner-content fade-up">
       <h2>Ready to Partner With Us?</h2>
       <p>Join a growing network of trusted businesses that rely on Agrobizca for premium agricultural products. Let's build a lasting partnership.</p>
-      <a href="#" class="btn-gold">
+      <a href="#contact" class="btn-gold">
         Contact Us Today
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1709,7 +1714,7 @@
   <!-- ================================================
        CONTACT PREVIEW
   ================================================ -->
-  <section class="contact-preview">
+  <section class="contact-preview" id="contact">
     <div class="contact-grid">
       <!-- Form -->
       <div class="contact-form fade-up">
@@ -1851,9 +1856,9 @@
         <h4>Pages</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Our Products</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#products">Our Products</a></li>
+          <li><a href="#contact">Contact Us</a></li>
         </ul>
       </div>
 
